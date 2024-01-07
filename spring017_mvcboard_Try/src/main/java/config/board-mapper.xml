@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.dao.BDao">
+
+	<!-- 글목록 -->
+	<select id="readAll" resultType="BDto" >
+		select * from mvcboard3 order by bno desc
+	</select>
+
+	<!-- 글쓰기 -->
+	<insert id="insert" parameterType="BDto" >
+		insert into mvcboard3 ( bname, bpass, btitle, bcontent, bip )
+		values ( #{bname} , #{bpass} , #{btitle} , #{bcontent} , #{bip} )
+	</insert>
+
+	<!-- 상세보기 -->
+	<select id="select" parameterType="int" resultType="BDto" >
+		select * from mvcboard3 where bno = #{bno}
+	</select>
+
+	<!-- 조회수 올리기 -->
+	<update id="update_bhit" parameterType="BDto" >
+		update mvcboard3 set bhit = bhit + 1 where bno = #{bno}
+	</update>
+
+	<!-- 글수정 -->
+	<update id="update" parameterType="BDto" >
+		update mvcboard3 set bname = #{bname}, btitle = #{btitle}, bcontent = #{bcontent}
+		where bno = #{bno} and bpass = #{bpass}
+	</update>
+
+	<!-- 글삭제 -->
+	<delete id="delete" parameterType="BDto" >
+		delete from mvcboard3 where bno = #{bno} and bpass = #{bpass}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
